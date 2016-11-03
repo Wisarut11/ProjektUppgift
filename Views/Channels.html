@@ -1,0 +1,56 @@
+﻿<div class="jumbotron">
+    <h1 ng-bind="title"></h1>
+    <h2>Chat</h2>
+</div>
+
+<div class="col-md-12">
+
+    <div class="col-md-3 text-center">
+        <h2>Channels</h2>
+        <div class="list-group">
+            <div href="#"
+                 class="list-group-item"
+                 ng-repeat="channel in data.channels track by $index">
+
+                <a ng-click="go('/ChannelM/' + channel.id)"><h4 ng-bind="channel.name"></h4></a>
+
+                <!--Subscribe button-->
+                <button type="button"
+                        class="btn btn-info"
+                        ng-click="subscribe(channel)"
+                        ng-show="data.subscribedChannels.indexOf(channel) == -1">
+                    <span class="glyphicon glyphicon-eye-open"></span> Subscribe
+                </button>
+
+                <span ng-show="data.subscribedChannels.indexOf(channel) != -1">
+                    <span class="glyphicon glyphicon-eye-close"></span> Subscribed
+                </span>
+
+            </div>
+
+            <!--<draggable
+                       ng-repeat="note in data.channels track by $index">
+            </draggable>-->
+        </div>
+    </div>
+
+    <!--Show Favorites(Subscribed)-->
+    <div class="col-md-4 text-center ">
+        <h2>Favorites</h2>
+
+        <div class="col-md-offset-2 ">
+            <ul class="list-group">
+                <li ng-repeat="channel in data.subscribedChannels track by $index" class="list-group-item">
+                    <h4 ng-bind="channel.name"></h4>
+                    <!--Unsubscribe Button-->
+                    <button type="button"
+                            class="btn btn-danger"
+                            ng-click="unsubscribe(channel)">
+                        <span class="glyphicon glyphicon-eye-close"></span> Unsubscribe
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+

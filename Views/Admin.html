@@ -1,0 +1,49 @@
+﻿<div class="jumbotron">
+    <h1 ng-bind="title"></h1>
+</div>
+
+<!--Create Channel-->
+<div class="col-md-12">
+    <div class="col-md-3">
+        <h2>Create Channel</h2>
+        <form ng-submit="addChannel()">
+            <div class="form-group">
+                <label>Name:</label>
+                <input type="text"
+                       name="name"
+                       ng-model="newChannel.name"
+                       class="form-control"
+                       required />
+            </div>
+            <button type="submit"
+                    class="btn btn-success">
+                Create
+            </button>
+        </form>
+    </div>
+
+    <!--Show Channels-->
+    <div class="col-md-4 ">
+        <h2>Channels</h2>
+
+        <div class="col-md-6 text-center">
+            <ul class="list-group ">
+                <li ng-repeat="channel in data.channels track by $index" class="list-group-item">
+                    <h4 ng-bind="channel.name"></h4>
+
+                    <!--Delete Button-->
+                    <button type="button"
+                            class="btn btn-danger"
+                            ng-click="deleteChannel(channel)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+   
+</div>
+
