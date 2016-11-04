@@ -6,16 +6,20 @@ angular.module("mainModule")
         "$location",
         "$route",
         "chatApi",
-        function ($scope, $location, $route, chatApi) {
+        "$timeout",
+
+        function ($scope, $location, $route, chatApi, $timeout) {
             $scope.$route = $route;
             $scope.data = {
                 messages: [],
                 channels: [],
+                channel: {},
                 subscribedChannels: [],
                 feed: []
             };
 
             
+
             //$scope.feed = [];
 
             $scope.getFeed = function () {
@@ -23,6 +27,30 @@ angular.module("mainModule")
                     return $scope.data.subscribedChannels.indexOf(channel.id) != -1;
                 });
             };
+
+            //var poll = function () {
+            //    $timeout(function () {
+            //        chatApi.getChannels()
+            //        .then(function (data) {
+            //            $scope.channels = data;
+            //            if (data != null) {
+            //                $scope.channels = data;
+            //                $scope.getFeed();
+            //            }
+            //        });
+
+            //        chatApi.getMessages()
+            //        .then(function (data) {
+            //            $scope.messages = data;
+            //            if (data != null) {
+            //                $scope.messages = data;
+            //                $scope.getFeed();
+            //            }
+            //        });
+            //        poll();
+            //    }, 1000);
+            //};
+
 
             chatApi.getChannels()
                 .then(function (data) {
@@ -39,7 +67,7 @@ angular.module("mainModule")
             $scope.loadSubscribtions = function () {
                 var dataString = localStorage.getItem("subscribedChannels");
                 if (dataString) {
-                   $scope.data.subscribedChannels = JSON.parse(dataString);
+                    $scope.data.subscribedChannels = JSON.parse(dataString);
                 }
             };
 
@@ -47,8 +75,11 @@ angular.module("mainModule")
                 var jsonString = JSON.stringify($scope.data.subscribedChannels);
                 localStorage.setItem("subscribedChannels", jsonString);
             };
-            
+
             $scope.loadSubscribtions();
+
+
+
 
             $scope.go = function (url) {
                 $location.path(url);

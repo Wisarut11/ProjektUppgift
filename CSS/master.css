@@ -6,3 +6,18 @@
 
 /* Layout */
 @import url(Layout/layout.css);
+
+
+
+.chatBox 
+{
+list-style-type: none;
+padding: 0px;
+margin: 0px;
+position:absolute;
+overflow: auto;
+/*bottom: 0;*/
+max-height: 950%;
+width: 50%;
+}
+

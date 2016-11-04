@@ -1,27 +1,62 @@
-﻿<div ng-repeat="message in channel.messages track by $index">
-    <p ng-bind="message.body"></p>
-    <p ng-bind="message.author"></p>
-    <p ng-bind="message.timeSent | date:'yyyy-MM-dd HH:mm'"></p>
+﻿<div class="jumbotron">
+    <h1 ng-bind="title"></h1>
 </div>
-
 <div class="col-md-12">
-    <div class="col-md-6">
-        <form ng-submit="sendMessage()">
-            <div class="form-group">
-                <textarea ng-model="newMessage.body"
-                          class="form-control"
-                          required
-                          placeholder="Write your message here..."></textarea>
+
+    <div class="col-md-12">
+        <div class="col-md-3"></div>
+        <!-- show chat-->
+        <div class="col-md-6 ">
+            <h2>Chat</h2>
+            <div class="col-md3">
+                <div class="chatBox">
+
+                    <div ng-repeat="message in channel.messages track by $index">
+                        <p ng-bind="message.author"></p>
+                        <p ng-bind="message.body"></p>
+                        <p ng-bind="message.timeSent | date:'yyyy-MM-dd HH:mm'"></p>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
+        </div>
+            <!-- show channels-->
+        <div class="col-md-3 text-center">
+            <h2>Channels</h2>
+            <div class="list-group">
+                <div href="#"
+                     class="list-group-item"
+                     ng-repeat="channel in data.channels track by $index">
+
+                    <a ng-click="go('/ChannelM/' + channel.id)"><h4 ng-bind="channel.name"></h4></a>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <form ng-submit="addMessage()">
                 <input type="text"
-                       class="form-control"
-                       required
                        ng-model="newMessage.author"
-                       placeholder="Enter your name" />
-            </div>
-            <button type="submit" 
-                    class="btn btn-success">Send</button>
-        </form>
+                       id="author"
+                       required
+                       class="form-control"
+                       placeholder="Name" />
+
+                <textarea type="text"
+                          ng-model="newMessage.body"
+                          id="body"
+                          required
+                          class="form-control"
+                          placeholder="Write your message..."></textarea>
+
+                <button type="submit"
+                        class="btn btn-success"
+                        title="newMessage">
+                    Send
+                </button>
+            </form>
+        </div>
     </div>
 </div>
+
+
+
